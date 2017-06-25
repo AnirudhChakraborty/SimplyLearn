@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "tutorials.anirudh.greendaotutorial"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+//This is your project gradle file. This code defines the path where the auto generated
+//files are to be created and the schema version. If you dont know about schema version
+// you can go through the documentation. In simple terms it defines the structure of database
+// and if there are any changes in the structure, Schema version is upgraded to commence
+// Migrations. More on migrations later. For now lets make the project/
+
+
+// Looks like I already have :p
+greendao {
+    schemaVersion 1
+    targetGenDir "src/main/java/"
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta1'
+    testCompile 'junit:junit:4.12'
+
+    compile 'org.greenrobot:greendao:3.2.2' // add library
+
+    //This is the project gradle file
+    //Now you have added the green dao plugin and dependency to your android project
+    // So its done. You are all ready to Create tables and make them to your use.
+    //But before that lets understand how green dao actually works
+}
